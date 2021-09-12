@@ -36,7 +36,7 @@
 
 
 //==================方式1====(推荐)===================//
-#define SOLVE_PROBLEM_NO_ 0
+#define SOLVE_PROBLEM_NO_ 4
 ////可以更改为：
 // #define SOLVE_PROBLEM_NO_ 1		//按照第1题的要求，同时在屏幕和outputA.txt中，输出50个最重要的供应商编号
 // #define SOLVE_PROBLEM_NO_ 2		//按照第2题的要求，在outputA.txt中输出表A的填写数据，在outputB.txt中输出表B的填写数据
@@ -70,9 +70,10 @@ bool solving_problem1=true;			//输出第一题答案相关数据(常为true影�
 
 bool solving_problem2 = false;			//⭐输出第二问以及之后的A文件答案，在第四题中作为平滑处理的开关
 bool solving_problem3 = false;			//⭐按照第三问的方式计算答案
+int line2=34;int line3=402;
+int line__ = solving_problem3?line3:line2;		//根据对合理估计位置的计算和matlab对于排序后score绘制的图线设置划分排名位置
 bool trust_is_related = true;			//信任度是否和供应商评分有关(可证明应常为true)
 bool finding_line=false;			//输出划线的合理估计位置
-int line__ = solving_problem3?42:34;		//根据对合理估计位置的计算和matlab对于排序后score绘制的图线设置划分排名位置
 
 bool solving_problem4 = false;			//⭐按照第四问计算答案，【自带改参】，且含一个额外参数自动求解problem4
 int anss4 = 28200*1.24;				//求解最大产能的结果
@@ -104,7 +105,6 @@ double power_sumup1 = 100;			//反映惩罚系数对供应商评分的重要程�
 double power_sumup2 = 150;			//反映少宽容系数对供应商评分的重要程度
 double tanxingxishu = 1.12;			//根据剩余生产力计算推的的生产弹性系数
 double tanxingxishu2 = 1.50;			//根据剩余生产力计算推的的生产弹性系数(单点)
-
 
 
 //(非)绝对排序模式
@@ -140,13 +140,13 @@ typedef vector<pii> vpii;
 //常用代码块
 #define putt(x) cerr<<#x<<" = "<<(x)<<endl;
 #define MAX 100007
-const double MOD = 1000000007;	//模数,常用的还有 998244353;
-const double eps = 1e-8;		//保留6位小数的精度,保留k位小数时一般取1e-(k+2);
+const double MOD = 1000000007;				//模数,常用的还有 998244353;
+const double eps = 1e-8;				//保留6位小数的精度,保留k位小数时一般取1e-(k+2);
 
 
 //题中常量
-#define MAX_S 403				//供货商上限
-#define MAX_W 241				//周序号上限
+#define MAX_S 403					//供货商上限
+#define MAX_W 241					//周序号上限
 
 
 //供应商抽象数据结构————参数列表
@@ -162,6 +162,7 @@ typedef struct _supplier_
 	double ask_pre[MAX_W]		={};		//订货量前缀和
 	double get_pre[MAX_W]		={};		//供货量前缀和
 	double pro[MAX_W]		={};		//产能和
+	double grow[25]			={};		//以24周为周期的增长率
 	double ask_sum			=0.;		//订货量总和
 	double get_sum			=0.;		//供货量总和
 	double pro_sum			=0.;		//产能总和
@@ -497,6 +498,7 @@ int main(int argc,char*argv[])
 		outputA_in_file=true;
 		outputB_in_file=true;
 	}
+	line__ = solving_problem3?line3:line2;
 
 
 
@@ -900,7 +902,7 @@ int main(int argc,char*argv[])
 
 
 
-//====================================pro2赋予供应商评分
+//====================================pro2赋予供应商评分,以及得出成长率♥
 	for(int i=1;i<MAX_S;i++)
 	{
 		for(int j=1;j<MAX_W;j++)
@@ -954,8 +956,39 @@ int main(int argc,char*argv[])
 
 
 
+
+
 //====================================sort->anss为计算不同类型的答案设计排序规则
 p4_next://解决第四题的标签
+
+
+	for(int i=1;i<MAX_S;i++)
+	{
+		for(int j=1;j<=24;j++)
+		{
+			vll temp_data;
+			for(int k=j;k<MAX_W;k+=24)
+				if(data[i].get_data[k])
+					temp_data.push_back(data[i].get_data[k]);
+			if(temp_data.size()==0)
+			{
+				data[i].grow[j]=1.;
+				continue;
+			}
+			sort(temp_data.begin(),temp_data.end());
+			int kk=temp_data.size(),kkk=temp_data.size()/2;
+			for(int k=0,kk=temp_data.size();k<kkk;k++)
+				data[i].grow[j]-=temp_data[k];
+			for(int k=temp_data.size()-1;k>=kkk;k--)
+				data[i].grow[j]+=temp_data[k];
+			data[i].grow[j]*=10/pow(temp_data.size()/2.,2);
+			// if(data[i].grow[j]<eps)cerr<<data[i].grow[j]<<endl;
+			data[i].grow[j]+=10;
+			data[i].grow[j]=log(data[i].grow[j]);
+			data[i].grow[j]=1.+data[i].grow[j]/14.;
+			// if(data[i].grow[j]>1)cerr<<data[i].grow[j]<<endl;
+		}
+	}
 
 	auto cmp=[](supplier_&s)
 	{
@@ -1018,7 +1051,7 @@ p4_next://解决第四题的标签
 	{
 		for(int i=1;i<MAX_S;i++)
 		{
-				cout<<(1./data[i].score)<<"\t";
+			cout<<(1./data[i].score)<<"\t";
 			if(i==400)break;
 		}
 	}
@@ -1040,11 +1073,12 @@ p4_next://解决第四题的标签
 				had+=data[i].pro[j];
 			}
 			//计算需要的供应商数量
-			if(had/MAX_W>(solving_problem4?anss4:28200.)/tanxingxishu)
+			if((had/MAX_W>(solving_problem4?anss4:28200.)/tanxingxishu))
 			{
 				if(finding_line)
 					cerr<<i<<endl;	//	第二题中 i=270	第三题中 i=267
-				line_=i;
+				if(line_==0)
+					line_=i;
 				// return 0;
 				break;
 			}
@@ -1137,11 +1171,19 @@ p4_next://解决第四题的标签
 			for(int i=1;i<MAX_S;i++)
 			{
 				data[i].ask_data[j]=data[i].get_data[j]/zhuanhuabi(data[i].get_material_type);
-				tot.ask_data[j]+=data[i].ask_data[j];
+				if(solving_problem3&&data[i].ask_data[j]>eps)
+				{
+					if(data[i].get_material_type=='A')data[i].ask_data[j]*=tanxingxishu;
+					if(data[i].get_material_type=='C')data[i].ask_data[j]/=tanxingxishu;
+				}
+				tot.ask_data[j]+=(ll)data[i].ask_data[j];
 			}
-			double temp=min((solving_problem4?anss4:28200.)/tot.ask_data[j],tanxingxishu2);
+			double temp=(solving_problem4?anss4:28200.)/tot.ask_data[j];
 			for(int i=1;i<MAX_S;i++)
 			{
+				if(solving_problem4)
+					data[i].ask_data[j]*=pow((data[i].grow[j]-1.)/(24.+j)+1.,j*2);
+				temp=max(0.11,min(temp,max(tanxingxishu2,data[i].grow[j])));
 				data[i].ask_data[j]=data[i].ask_data[j]*temp*zhuanhuabi(data[i].get_material_type)*data[i].bill_data[j];
 			}
 		}
