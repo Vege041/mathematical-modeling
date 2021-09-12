@@ -36,7 +36,7 @@
 
 
 //==================方式1====(推荐)===================//
-#define SOLVE_PROBLEM_NO_ 4
+#define SOLVE_PROBLEM_NO_ 0
 ////可以更改为：
 // #define SOLVE_PROBLEM_NO_ 1		//按照第1题的要求，同时在屏幕和outputA.txt中，输出50个最重要的供应商编号
 // #define SOLVE_PROBLEM_NO_ 2		//按照第2题的要求，在outputA.txt中输出表A的填写数据，在outputB.txt中输出表B的填写数据
