@@ -49,10 +49,10 @@
 //封装好的运行模式选择(推荐一次只打开一个开关)
 //将需要的开关设为	true
 //将其他的开关设为	false	即可
-bool problem_No_1=false;		//按照第1题的要求，同时在屏幕和outputA.txt中，输出50个最重要的供应商编号
-bool problem_No_2=false;		//按照第2题的要求，在outputA.txt中输出表A的填写数据，在outputB.txt中输出表B的填写数据
-bool problem_No_3=false;		//按照第3题的要求，在outputA.txt中输出表A的填写数据，在outputB.txt中输出表B的填写数据
-bool problem_No_4=false;		//按照第4题的要求，在outputA.txt中输出表A的填写数据，在outputB.txt中输出表B的填写数据
+bool problem_No_1 = false ;		//按照第1题的要求，同时在屏幕和outputA.txt中，输出50个最重要的供应商编号
+bool problem_No_2 = false ;		//按照第2题的要求，在outputA.txt中输出表A的填写数据，在outputB.txt中输出表B的填写数据
+bool problem_No_3 = false ;		//按照第3题的要求，在outputA.txt中输出表A的填写数据，在outputB.txt中输出表B的填写数据
+bool problem_No_4 = false ;		//按照第4题的要求，在outputA.txt中输出表A的填写数据，在outputB.txt中输出表B的填写数据
 
 
 
@@ -62,56 +62,56 @@ bool problem_No_4=false;		//按照第4题的要求，在outputA.txt中输出表A
 
 
 //可选辅助运算选项♥
-bool solving_problem1_num_list=false;		//⭐输出第一问供应商S的重要性排名
-bool solving_problem1_type=false;		//在输出排名的情况下配合输出材料类型
-bool solving_problem1_score=false;		//⭐在不输出排名的情况下输出score列表，结合MatLab生成直观图线
-bool solving_problem1_pro=false;		//在不输出排名的情况下输出pro列表
-bool solving_problem1=true;			//输出第一题答案相关数据(常为true影响可忽略不计)
-
-bool solving_problem2 = false;			//⭐输出第二问以及之后的A文件答案，在第四题中作为平滑处理的开关
-bool solving_problem3 = false;			//⭐按照第三问的方式计算答案
-int line2=34;int line3=402;
-int line__ = solving_problem3?line3:line2;		//根据对合理估计位置的计算和matlab对于排序后score绘制的图线设置划分排名位置
-bool trust_is_related = true;			//信任度是否和供应商评分有关(可证明应常为true)
-bool finding_line=false;			//输出划线的合理估计位置
-
-bool solving_problem4 = false;			//⭐按照第四问计算答案，【自带改参】，且含一个额外参数自动求解problem4
-int anss4 = 28200*1.24;				//求解最大产能的结果
-
-bool outputA_in_file=true;			//⭐是否在文件中输出表A(默认为屏幕命令窗口输出)
-bool outputB_in_file=true;			//⭐是否输出文件B(默认不输出)
-bool using_pre_pro4=true;			//⭐第四问时是否预处理订单数据
+bool solving_problem1_num_list 	= false ;		//⭐输出第一问供应商S的重要性排名
+bool solving_problem1_type 	= false ;		//在输出排名的情况下配合输出材料类型
+bool solving_problem1_score 	= false ;		//⭐在不输出排名的情况下输出score列表，结合MatLab生成直观图线
+bool solving_problem1_pro 	= false ;		//在不输出排名的情况下输出pro列表
+bool solving_problem1 		= true 	;		//输出第一题答案相关数据(常为true影响可忽略不计)
+	
+bool solving_problem2 		= false ;		//⭐输出第二问以及之后的A文件答案，在第四题中作为平滑处理的开关
+bool solving_problem3 		= false ;		//⭐按照第三问的方式计算答案
+int line2 = 34 ; int line3 	= 402 	;		//根据对合理估计位置的计算和matlab对于排序后score绘制的图线设置划分排名位置
+int line__ = solving_problem2?line2:line3 ;		//根据问题选择设置划分排名位置
+bool trust_is_related 		= true 	;		//信任度是否和供应商评分有关(经有关证明，应常为true)
+bool finding_line 		= false ;		//输出划线的合理估计位置
+	
+bool solving_problem4 		= false ;		//⭐按照第四问计算答案，且含一个额外参数可以自动求解problem4
+int anss4 			= 28200*1.24 ;		//求解最大产能的结果
+	
+bool outputA_in_file 		= true 	;		//⭐是否在文件中输出表A(默认为屏幕命令窗口输出)
+bool outputB_in_file 		= true 	;		//⭐是否输出文件B(默认不输出)
+bool using_pre_pro4 		= true 	;		//⭐第四问时是否预处理订单数据
 
 
 //调试开关
-bool outer_program = false;			//外部程序交互开关
-bool debuging = false;				//部分调试代码开关
-bool debug_input_ask = false;			//调试输入订货量数据
-bool debug_input_get = false;			//调试输入供货量数据
-bool debug_pro_1 = false;			//调试第一次处理
-bool debug_output1 = false;			//输出score倒数数据
-bool debug_por15 = false;			//在粗处理后输出debug数据
-bool debuging_pre_pro = false;			//输出预处理后的订单数据然后直接结束程序
+bool outer_program 	= false;			//外部程序交互开关
+bool debuging 		= false;			//部分调试代码开关
+bool debug_input_ask 	= false;			//调试输入订货量数据
+bool debug_input_get 	= false;			//调试输入供货量数据
+bool debug_pro_1 	= false;			//调试第一次处理
+bool debug_output1 	= false;			//输出score倒数数据
+bool debug_por15 	= false;			//在粗处理后输出debug数据
+bool debuging_pre_pro 	= false;			//⭐输出预处理后的订单数据然后直接结束程序,结合MatLab绘图，用于分析修改不合理订单
 
-bool prove_cycle_bill=false;			//查看周期稳定在24周的证据
+bool prove_cycle_bill	= false;			//⭐查看周期稳定在24周的证据
 
 
 
 //通过计算得出的辅助列表
-bool using_trust = true;			//有无计算信用分对供应商评分的影响
-double power_trust = 1;				//信用分对供应商评分的重要程度
-bool using_sumup = true;			//有无计算订单总数对供应商评分的重要程度
-double power_sumup1 = 100;			//反映惩罚系数对供应商评分的重要程度
-double power_sumup2 = 150;			//反映少宽容系数对供应商评分的重要程度
-double tanxingxishu = 1.12;			//根据剩余生产力计算推的的生产弹性系数
-double tanxingxishu2 = 1.50;			//根据剩余生产力计算推的的生产弹性系数(单点)
+bool using_trust 	= true;			//有无计算信用分对供应商评分的影响
+double power_trust 	= 1;			//信用分对供应商评分的重要程度
+bool using_sumup 	= true;			//有无计算订单总数对供应商评分的重要程度
+double power_sumup1 	= 100;			//反映惩罚系数对供应商评分的重要程度
+double power_sumup2 	= 150;			//反映少宽容系数对供应商评分的重要程度
+double tanxingxishu 	= 1.12;			//根据剩余生产力计算推的的生产弹性系数
+double tanxingxishu2 	= 1.50;			//根据剩余生产力计算推的的生产弹性系数(单点)
 
 
 //(非)绝对排序模式
 #define SCORE 1					//综合结果
 #define TRUST 2					//绝对信任
 #define SUMUP 3					//绝对到货
-const int MODEL=SCORE;
+const int MODEL = SCORE ;
 
 
 
@@ -208,17 +208,7 @@ namespace finish_table_B
 	#define fi first
 	#define se second
 
-	typedef map<int,int> mii;
-	typedef map<ll,ll> mll;
-	typedef multiset<int> msii;
-	typedef multiset<ll> msll;
-	typedef set<int> sii;
-	typedef set<ll> sll;
-	typedef set<pii> spii;
-	typedef set<pll> spll;
-	typedef vector<int> vii;
 	typedef vector<ll> vll;
-	typedef vector<pii> vpii;
 	typedef vector<pll> vpll;
 	#define it_ iterator
 	#define r_it_ reverse_iterator
@@ -476,29 +466,29 @@ int main(int argc,char*argv[])
 	//根据运行选项打开默认的辅助开关
 	if(problem_No_1)
 	{
-		solving_problem1_num_list=true;
+		solving_problem1_num_list = true;
 	}
 	if(problem_No_2)
 	{
-		solving_problem2 = true;
-		outputA_in_file=true;
-		outputB_in_file=true;
+		solving_problem2 	= true;
+		outputA_in_file 	= true;
+		outputB_in_file 	= true;
 	}
 	if(problem_No_3)
 	{
-		solving_problem2 = true;
-		solving_problem3 = true;
-		outputA_in_file=true;
-		outputB_in_file=true;
+		solving_problem2 	= true;
+		solving_problem3 	= true;
+		outputA_in_file 	= true;
+		outputB_in_file 	= true;
 	}
 	if(problem_No_4)
 	{
-		solving_problem2 = true;
-		solving_problem4 = true;
-		outputA_in_file=true;
-		outputB_in_file=true;
+		solving_problem2 	= true;
+		solving_problem4 	= true;
+		outputA_in_file 	= true;
+		outputB_in_file 	= true;
 	}
-	line__ = solving_problem3?line3:line2;
+	line__ = solving_problem2?line2:line3;
 
 
 
@@ -508,8 +498,11 @@ int main(int argc,char*argv[])
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 
+
+	//配合外部程序运算(多次采用二分法得出本程序中的各种常数的最优值)
 	if(outer_program)
 	{
+
 		// putt(argc);		//检测附加参数个数
 		//为了查找以及验证所选系数为最优方案时添加的代码片段
 		//同时，考虑到运行环境的不同这里处理两种较为通用的情况
@@ -566,16 +559,17 @@ int main(int argc,char*argv[])
 	}
 
 
+
 	if(solving_problem4)
 	{
 		//修改运行模式接口参数
 		solving_problem1_num_list=false;			//输出供应商S的重要性排名
 		solving_problem1_score=false;				//在不输出排名的情况下输出score列表
-		solving_problem1_pro=false;					//在不输出排名的情况下输出pro列表
-		solving_problem1=false;						//输出第一题答案相关数据
+		solving_problem1_pro=false;				//在不输出排名的情况下输出pro列表
+		solving_problem1=false;					//输出第一题答案相关数据
 
-		solving_problem3 = false;					//按照第三问计算答案
-		line__ = 402 ;								//设置划分排名位置
+		solving_problem3 = false;				//按照第三问计算答案
+		line__ = 402 ;						//设置划分排名位置
 
 		//修改预设参数
 		power_trust=1;
@@ -583,6 +577,9 @@ int main(int argc,char*argv[])
 		power_sumup2=150;
 
 	}
+
+
+
 
 
 
@@ -597,6 +594,7 @@ int main(int argc,char*argv[])
 	}
 	if(outputA_in_file)
 		freopen("outputA.txt","w",stdout);
+
 	string str;
 	char ch;
 	for(int i=1;i<MAX_S;i++)
@@ -624,7 +622,7 @@ int main(int argc,char*argv[])
 		if(debug_input_ask||debug_input_get)cout<<endl;
 		// stop_screen();
 	}
-	//关闭文件通讯
+	//关闭输入文件通讯
 	input_ask.close();
 	input_get.close();
 
@@ -675,10 +673,12 @@ int main(int argc,char*argv[])
 			}
 		}
 	}
-	else
+	else//（作为废弃方案，因为在实际计算中误差较大，已停用）
 	{
 		anss4*=tanxingxishu;
 	}
+
+
 
 	//调试输出预处理/合理化的订单数据
 	auto shuchudata=[&]()
@@ -699,6 +699,7 @@ int main(int argc,char*argv[])
 	}
 
 
+
 	auto zhuanhuabi=[](char ch)		//转化比
 	{
 		double ret;
@@ -711,6 +712,7 @@ int main(int argc,char*argv[])
 		}
 		return ret;
 	};
+
 
 
 	auto zhuanhuaxishu=[](char ch)		//转化系数
@@ -764,6 +766,7 @@ int main(int argc,char*argv[])
 		}
 
 
+
 		// //trust计算供应商信用分
 		data[i].trust/=data[i].ask_sum;//订单加权
 		data[i].trust-=1./(pow(data[i].bill+041,1.5));
@@ -791,6 +794,8 @@ int main(int argc,char*argv[])
 
 
 	}
+
+
 
 
 
@@ -889,6 +894,7 @@ int main(int argc,char*argv[])
 		}
 
 		goto p4_next;
+
 	}
 
 
@@ -993,6 +999,8 @@ p4_next://解决第四题的标签
 		}
 	}
 
+
+
 	auto cmp=[](supplier_&s)
 	{
 
@@ -1012,6 +1020,9 @@ p4_next://解决第四题的标签
 
 	};
 
+
+
+	//根据对企业的贡献值和信任度打分结果排序，其结果就是供应商对企业的重要程度排序
 	sort(data+1,data+MAX_S,[&](supplier_ a,supplier_ b){return cmp(a)>cmp(b);});
 
 
@@ -1079,7 +1090,7 @@ p4_next://解决第四题的标签
 			if((had/MAX_W>(solving_problem4?anss4:28200.)/tanxingxishu))
 			{
 				if(finding_line)
-					cerr<<i<<endl;	//	第二题中 i=270	第三题中 i=267
+					cerr<<i<<endl;		//	第二题中 i=270	第三题中 i=267
 				if(line_==0)
 					line_=i;
 				// return 0;
@@ -1181,7 +1192,7 @@ p4_next://解决第四题的标签
 				}
 				tot.ask_data[j]+=(ll)data[i].ask_data[j];
 			}
-			double temp=(solving_problem4?anss4:28200.)/tot.ask_data[j];
+			double temp=(solving_problem4?anss4:28200.*1.02)/tot.ask_data[j];
 			for(int i=1;i<MAX_S;i++)
 			{
 				if(solving_problem4)
@@ -1207,11 +1218,17 @@ p4_next://解决第四题的标签
 		cerr<<"已完成表B的填写 ！"<<endl<<endl;
 
 		return 0;
+
 	}
 
 
 
+
+
+
 //后面就是在正解出来之前的处理了
+
+
 
 
 //====================================for_4为第四问做的订购合理性评估做铺垫(平滑处理)
@@ -1226,6 +1243,7 @@ p4_next://解决第四题的标签
 			}
 		}
 	}
+
 
 	//平滑处理
 	for(int j=1;j<=24;j++)
@@ -1249,6 +1267,7 @@ p4_next://解决第四题的标签
 			}
 		}
 	}
+
 
 
 
@@ -1279,6 +1298,7 @@ p4_next://解决第四题的标签
 
 
 
+
 //====================================anss_A2B填写表A以及之后为填写表B设计打基础的代码块
 	if(solving_problem2)
 		for(int i=1;i<MAX_S;i++)
@@ -1294,6 +1314,7 @@ p4_next://解决第四题的标签
 	return 0;
 
 }
+
 /*
 	Done .
 */
