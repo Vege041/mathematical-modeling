@@ -1,6 +1,6 @@
 /*
 	
-	至评委老师：
+	至评委老师♥：
 		要检验此程序，您只需要以下四个步骤：
 
 		①将【附件1】的两个表格中的内容全选复制到文本文档【ask.txt】(订单信息)和【get.txt】(供货信息)，都删除第一行内容后保存
@@ -366,8 +366,8 @@ namespace finish_table_B
 				}
 				if(it.se==0)continue;
 				// cerr<<it.se<<endl;
-				//优先考虑放在当前周排名前四的转运公司
-				for(int i=1;it.se&&i<=4;i++)
+				//优先考虑放在当前周排名前四的转运公司，第四问的时候要考虑到前六
+				for(int i=1;it.se&&i<=(solving_problem4?6:4);i++)
 				{
 					if(tsp[i].order[j]+it.se<=6000)
 					{
@@ -591,7 +591,10 @@ int main(int argc,char*argv[])
 	input_ask.open("ask.txt");
 	input_get.open("get.txt");
 	if(!input_ask||!input_get)
+	{
+		cerr<<"input file no found . . ."<<endl;
 		return -1;
+	}
 	if(outputA_in_file)
 		freopen("outputA.txt","w",stdout);
 	string str;
